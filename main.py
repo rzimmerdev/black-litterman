@@ -6,10 +6,9 @@ import cvxpy as cp
 import dxlib as dx
 from dxlib.interfaces.external import yfinance
 import matplotlib.pyplot as plt
-from scipy.stats import norm
 
 from fixed_income import Futures, IPCA
-from utils import dirichlet_weights, black_litterman
+from utils import black_litterman
 
 available_tickers = {
     'Treasury': 'ZN=F',  # 10-Year T-Note Future 1st contract
@@ -105,10 +104,9 @@ def create_convex_variables(name, securities,
 
 
 def build_portfolio(histories: dict, bounds: dict) -> Tuple[pd.Series, pd.DataFrame]:
-    gamma = 1e-1
     tau = 1
-    var_conf = 0.99
     var_bound = 1e-2
+    max_sum = 1.5
 
     # First step is to sum up histories so as to calculate the entire covariance matrix, not just intergroup covariances
     df = pd.concat([history.df for history in histories.values()])
@@ -180,7 +178,7 @@ def build_portfolio(histories: dict, bounds: dict) -> Tuple[pd.Series, pd.DataFr
     final_selected = cp.hstack([y for y in selected.values()])
 
     # additional constraint to ensure the sum of absolute weights
-    constraints['sum'] = [cp.sum(cp.abs(final_weights)) <= 2]
+    constraints['sum'] = [cp.sum(cp.abs(final_weights)) <= max_sum]
 
     # VaR constraint for entire portfolio
     portfolio_variance = cp.quad_form(final_weights, cov)
@@ -188,20 +186,14 @@ def build_portfolio(histories: dict, bounds: dict) -> Tuple[pd.Series, pd.DataFr
     # Add constraints to ensure the portfolio variance is close to desired risk
     # Cant use cp.sqrt since is not DCP compliant
     # noinspection PyTypeChecker
-    constraints['risk'] = [portfolio_variance <= var_bound ** 2]
+    constraints['risk'] = [cp.abs(portfolio_variance) <= var_bound ** 2]
 
-    def optim(mu, sigma):
-        # Objective function: R
-        objective = cp.Maximize(
-            cp.matmul(mu, final_weights)
-        )
+    objective = cp.Maximize(cp.matmul(returns, final_weights))
 
-        problem = cp.Problem(objective, [c for group in constraints.values() for c in group])
-        problem.solve(solver=cp.ECOS_BB)
+    problem = cp.Problem(objective, [c for group in constraints.values() for c in group])
+    problem.solve(solver=cp.ECOS_BB)
 
-        return final_weights.value * final_selected.value
-
-    return optim(returns, cov), df
+    return final_weights.value * final_selected.value, df
 
 
 def main():
@@ -231,10 +223,17 @@ def main():
     selected_securities = optim_weights.index
     optim_weights.index = [f"-{security.ticker}" if weight < 0 else security.ticker
                            for security, weight in optim_weights.items()]
-    total_pct = optim_weights.sum() * 100
     weights = optim_weights.abs()
+    total_pct = weights.sum() * 100
 
     sep = 0.05
+
+    def autopct(values):  # return the original percentage value, instead of the normalized one
+        def my_autopct(pct):
+            total = sum(values)
+            return f'{pct * total:.2f}%'.rstrip('0').rstrip('.')
+        return my_autopct
+
     if weights[weights < sep].size > 3:
         others = weights[weights < sep]
         fig, axs = plt.subplots(1, 2, figsize=(15, 5))
@@ -247,25 +246,28 @@ def main():
         plt.show()
     else:
         fig, axs = plt.subplots(1, 1, figsize=(15, 5))
-        axs.pie(weights, autopct='%1.1f%%', labels=weights.index)
+        # dont make percentage add up to 100
+        axs.pie(weights, labels=weights.index, autopct=autopct(weights), pctdistance=0.85)
         axs.set_title(f"Pesos da carteira - {total_pct:.2f}%")
         plt.show()
 
     # backtest of the portfolio
     # get the returns of the selected securities
     returns = df[selected_securities].pct_change().dropna()
+    brazilian = histories['brazilian']
+    ibov = brazilian.get(levels={dx.SchemaLevel.SECURITY: [brazilian.schema.security_manager.get('IND1!')]})
+    ibov = ibov.df.pct_change().dropna()
+    spy = histories['spy'].df.pct_change().dropna()
+
+    ibov = ibov.reset_index().pivot(index='date', columns='security', values='close')
+    spy = spy.reset_index().pivot(index='date', columns='security', values='close')
 
     # plot accumulated returns graph, and the portfolio accumulated returns, on the same graph
     acc_portfolio = (1 + returns @ weights.values).cumprod()
-    acc_returns = (1 + returns).cumprod()
-    acc_returns['Portfolio'] = acc_portfolio
 
-    for column in acc_returns.columns:
-        if column == 'Portfolio':
-            acc_returns[column].plot(figsize=(15, 5), color='cyan', linestyle='--', label='Portfolio')
-        else:
-            acc_returns[column].plot(alpha=0.65)
-
+    plt.plot(acc_portfolio, color='cyan', linestyle=':', label='Portfolio')
+    plt.plot((1 + ibov).cumprod(), color='blue', label='IBRX100')
+    plt.plot((1 + spy).cumprod(), color='red', label='S&P500')
     plt.title('Retornos acumulados')
     plt.legend(loc='upper left')
     plt.show()
