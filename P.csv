@@ -1,0 +1,5 @@
+,           IPCA29, IPCA50, DI26,   DI29,   CNYBRL=X,   USDBRL=X,  EURBRL=X,   ZN=F,   IND1!,  ES=F
+View1,       0.0,    0.0,    0.0,    0.0,    0.0,       1.0,        0.0,       -1.0,    0.0,    0.0  # Apostar a favor da alta do dólar, em função da renda fixa americana
+View2,       0.0,    0.0,    0.0,    0.0,   -1.0,       1.0,        0.0,        0.0,    0.0,    0.0  # Hedgear posição comprada do dólar com venda de CNY
+...,
+ViewN,
