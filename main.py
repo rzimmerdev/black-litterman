@@ -64,7 +64,7 @@ def load_history_groups():
     return histories
 
 
-def create_convex_variables(name, history,
+def create_convex_variables(name, securities,
                             upper_limit=1,
                             lower_limit=0,
                             max_quantity=None) -> Tuple[cp.Variable, cp.Variable, List[cp.Constraint]]:
@@ -84,7 +84,6 @@ def create_convex_variables(name, history,
     Returns:
         tuple: A tuple containing the adjustable variables and the list of constraints
     """
-    securities = history.df.reset_index()['security'].unique()
     n = len(securities)
 
     # These are the weights of the portfolio
@@ -106,6 +105,11 @@ def create_convex_variables(name, history,
 
 
 def build_portfolio(histories: dict, bounds: dict) -> Tuple[pd.Series, pd.DataFrame]:
+    gamma = 1e-1
+    tau = 1
+    var_conf = 0.99
+    var_bound = 1e-2
+
     # First step is to sum up histories so as to calculate the entire covariance matrix, not just intergroup covariances
     df = pd.concat([history.df for history in histories.values()])
     df = df.reset_index()
@@ -126,34 +130,6 @@ def build_portfolio(histories: dict, bounds: dict) -> Tuple[pd.Series, pd.DataFr
     returns = df.apply(log_returns).dropna()
     cov = returns.cov()
 
-    weights: dict[str, cp.Variable] = {}
-    selected: dict[str, cp.Variable] = {}
-    constraints: dict[str, List[cp.Constraint]] = {}
-    for group in histories:
-        history = histories[group]
-        # sub covariance matrix, only for the group
-        weight, select, constraint = create_convex_variables(group, history, **(bounds[group]))
-        weights[group] = weight
-        selected[group] = select
-        constraints[group] = constraint
-
-    final_weights = cp.hstack([w for w in weights.values()])
-    final_selected = cp.hstack([y for y in selected.values()])
-
-    # additional VaR constraint
-    conf = 0.99
-    bound = 3e-2
-    z_score = norm.ppf(conf)
-    std = cp.sqrt(cp.quad_form(final_weights, cov))
-    var = cp.matmul(returns.values, final_weights) - z_score * std
-    # constraints['var'] = [var >= bound] -> doesn't work, need to use a list comprehension
-    # constraints['var'] = [cp.sum(var) >= bound]
-
-    # additional constraint to ensure the sum of absolute weights
-    constraints['sum'] = [cp.sum(cp.abs(final_weights)) <= 1]
-
-    gamma = 1e-2
-    tau = 2
     securities = list(returns.columns)
     sm = dx.SecurityManager.from_list(securities)
     view_names = ["Hedge BRL/USD with CNY/BRL"]
@@ -185,14 +161,39 @@ def build_portfolio(histories: dict, bounds: dict) -> Tuple[pd.Series, pd.DataFr
         print(f"View {i}: {view} on {affected_securities}")
 
     mean_returns = returns.mean()
-    returns_bl = black_litterman(pick_matrix, views, view_uncertainty, mean_returns, cov, tau)
+    returns = black_litterman(pick_matrix, views, view_uncertainty, mean_returns, cov, tau)
 
     # problem definition -> mean-variance optimization with cardinality constraint
+    weights: dict[str, cp.Variable] = {}
+    selected: dict[str, cp.Variable] = {}
+    constraints: dict[str, List[cp.Constraint]] = {}
+    for group in histories:
+        history = histories[group]
+        securities = history.df.reset_index()['security'].unique()
+        # sub covariance matrix, only for the group
+        weight, select, constraint = create_convex_variables(group, securities, **(bounds[group]))
+        weights[group] = weight
+        selected[group] = select
+        constraints[group] = constraint
+
+    final_weights = cp.hstack([w for w in weights.values()])
+    final_selected = cp.hstack([y for y in selected.values()])
+
+    # additional constraint to ensure the sum of absolute weights
+    constraints['sum'] = [cp.sum(cp.abs(final_weights)) <= 2]
+
+    # VaR constraint for entire portfolio
+    portfolio_variance = cp.quad_form(final_weights, cov)
+
+    # Add constraints to ensure the portfolio variance is close to desired risk
+    # Cant use cp.sqrt since is not DCP compliant
+    # noinspection PyTypeChecker
+    constraints['risk'] = [portfolio_variance <= var_bound ** 2]
+
     def optim(mu, sigma):
-        # Objective function: Mean-variance optimization
-        # Min(0.5 * cp.quad_form(w, sigma) - gamma * mu @ w))
-        objective = cp.Minimize(
-            0.5 * cp.quad_form(final_weights, sigma) - gamma * cp.matmul(mu, final_weights)
+        # Objective function: R
+        objective = cp.Maximize(
+            cp.matmul(mu, final_weights)
         )
 
         problem = cp.Problem(objective, [c for group in constraints.values() for c in group])
@@ -200,8 +201,7 @@ def build_portfolio(histories: dict, bounds: dict) -> Tuple[pd.Series, pd.DataFr
 
         return final_weights.value * final_selected.value
 
-    alpha = np.ones(num_views)
-    return dirichlet_weights(returns_bl, cov, alpha, optim), df
+    return optim(returns, cov), df
 
 
 def main():
@@ -235,12 +235,12 @@ def main():
     weights = optim_weights.abs()
 
     sep = 0.05
-    if weights[weights < sep].size > 0 and sum(weights[weights < sep]) > 0.09:
+    if weights[weights < sep].size > 3:
         others = weights[weights < sep]
         fig, axs = plt.subplots(1, 2, figsize=(15, 5))
-        weights = weights[weights >= sep]
-        weights['Outros'] = others.sum()
-        axs[0].pie(weights, autopct='%1.1f%%', labels=weights.index)
+        pie_weights = weights[weights >= sep]
+        pie_weights['Outros'] = others.sum()
+        axs[0].pie(pie_weights, autopct='%1.1f%%', labels=pie_weights.index)
         axs[0].set_title(f"Pesos da carteira - {total_pct:.2f}%")
         axs[1].pie(others, autopct='%1.1f%%', labels=others.index)
         axs[1].set_title(f"Pesos da carteira - Outros ({others.sum():.2f}%)")
@@ -267,7 +267,7 @@ def main():
             acc_returns[column].plot(alpha=0.65)
 
     plt.title('Retornos acumulados')
-    plt.legend()
+    plt.legend(loc='upper left')
     plt.show()
 
 
