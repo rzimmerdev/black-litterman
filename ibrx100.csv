@@ -1,101 +1,101 @@
-tickers
-ENGI11.SA
-HAPV3.SA
-CPFE3.SA
-CMIN3.SA
-CVCB3.SA
-CYRE3.SA
-DXCO3.SA
-DIRR3.SA
-ECOR3.SA
-ELET3.SA
-ELET6.SA
-CPLE6.SA
-ENAT3.SA
-CPLE3.SA
-ENEV3.SA
-EGIE3.SA
-EQTL3.SA
-EZTC3.SA
-FLRY3.SA
-GGBR4.SA
-GOAU4.SA
-GMAT3.SA
-NTCO3.SA
-RRRP3.SA
-EMBR3.SA
-BBAS3.SA
-ALOS3.SA
-ALPA4.SA
-ABEV3.SA
-ARZZ3.SA
-ASAI3.SA
-AURE3.SA
-AZUL4.SA
-B3SA3.SA
-BBSE3.SA
-BBDC3.SA
-CSAN3.SA
-BRAP4.SA
-HYPE3.SA
-BRKM5.SA
-BRFS3.SA
-BPAC11.SA
-CXSE3.SA
-CRFB3.SA
-CCRO3.SA
-CMIG4.SA
-CIEL3.SA
-COGN3.SA
-CSMG3.SA
-BBDC4.SA
-TEND3.SA
-SOMA3.SA
-RAIL3.SA
-SBSP3.SA
-SANB11.SA
-STBP3.SA
-SMTO3.SA
-CSNA3.SA
-SLCE3.SA
-SMFT3.SA
-SUZB3.SA
-RAIZ4.SA
-VIVT3.SA
-RADL3.SA
-TIMS3.SA
-TOTS3.SA
-TRPL4.SA
-UGPA3.SA
-USIM5.SA
-VALE3.SA
-VAMO3.SA
-VBBR3.SA
-VIVA3.SA
-WEGE3.SA
-TAEE11.SA
-BEEF3.SA
-IGTI11.SA
-IRBR3.SA
-ITSA4.SA
-ITUB4.SA
-JBSS3.SA
-KLBN11.SA
-RENT3.SA
-LREN3.SA
-LWSA3.SA
-MGLU3.SA
-RDOR3.SA
-MRFG3.SA
-YDUQ3.SA
-MOVI3.SA
-MRVE3.SA
-MULT3.SA
-PCAR3.SA
-PETR3.SA
-PETR4.SA
-RECV3.SA
-PRIO3.SA
-PETZ3.SA
-PSSA3.SA
-POMO4.SA
+tickers, sector
+ENGI11.SA, Utilities
+HAPV3.SA, Healthcare
+CPFE3.SA, Utilities
+CMIN3.SA, Materials
+CVCB3.SA, ConsumerDiscretionary
+CYRE3.SA, RealEstate
+DXCO3.SA, Materials
+DIRR3.SA, RealEstate
+ECOR3.SA, Industrials
+ELET3.SA, Utilities
+ELET6.SA, Utilities
+CPLE6.SA, Utilities
+ENAT3.SA, Energy
+CPLE3.SA, Utilities
+ENEV3.SA, Utilities
+EGIE3.SA, Utilities
+EQTL3.SA, Utilities
+EZTC3.SA, RealEstate
+FLRY3.SA, Healthcare
+GGBR4.SA, Materials
+GOAU4.SA, Materials
+GMAT3.SA, ConsumerDiscretionary
+NTCO3.SA, ConsumerStaples
+RRRP3.SA, Energy
+EMBR3.SA, Industrials
+BBAS3.SA, Financials
+ALOS3.SA, Healthcare
+ALPA4.SA, ConsumerDiscretionary
+ABEV3.SA, ConsumerStaples
+ARZZ3.SA, ConsumerDiscretionary
+ASAI3.SA, ConsumerStaples
+AURE3.SA, RealEstate
+AZUL4.SA, Industrials
+B3SA3.SA, Financials
+BBSE3.SA, Financials
+BBDC3.SA, Financials
+CSAN3.SA, Energy
+BRAP4.SA, Materials
+HYPE3.SA, Healthcare
+BRKM5.SA, Materials
+BRFS3.SA, ConsumerStaples
+BPAC11.SA, Financials
+CXSE3.SA, Technology
+CRFB3.SA, ConsumerStaples
+CCRO3.SA, Industrials
+CMIG4.SA, Utilities
+CIEL3.SA, Technology
+COGN3.SA, ConsumerDiscretionary
+CSMG3.SA, Utilities
+BBDC4.SA, Financials
+TEND3.SA, RealEstate
+SOMA3.SA, ConsumerDiscretionary
+RAIL3.SA, Industrials
+SBSP3.SA, Utilities
+SANB11.SA, Financials
+STBP3.SA, Industrials
+SMTO3.SA, ConsumerStaples
+CSNA3.SA, Materials
+SLCE3.SA, ConsumerStaples
+SMFT3.SA, ConsumerStaples
+SUZB3.SA, Materials
+RAIZ4.SA, Energy
+VIVT3.SA, CommunicationServices
+RADL3.SA, ConsumerStaples
+TIMS3.SA, CommunicationServices
+TOTS3.SA, Technology
+TRPL4.SA, Utilities
+UGPA3.SA, Energy
+USIM5.SA, Materials
+VALE3.SA, Materials
+VAMO3.SA, Industrials
+VBBR3.SA, Industrials
+VIVA3.SA, RealEstate
+WEGE3.SA, Industrials
+TAEE11.SA, Utilities
+BEEF3.SA, ConsumerStaples
+IGTI11.SA, Financials
+IRBR3.SA, Financials
+ITSA4.SA, Financials
+ITUB4.SA, Financials
+JBSS3.SA, ConsumerStaples
+KLBN11.SA, Materials
+RENT3.SA, ConsumerDiscretionary
+LREN3.SA, ConsumerDiscretionary
+LWSA3.SA, Technology
+MGLU3.SA, ConsumerDiscretionary
+RDOR3.SA, Healthcare
+MRFG3.SA, ConsumerStaples
+YDUQ3.SA, ConsumerDiscretionary
+MOVI3.SA, ConsumerDiscretionary
+MRVE3.SA, RealEstate
+MULT3.SA, RealEstate
+PCAR3.SA, ConsumerStaples
+PETR3.SA, Energy
+PETR4.SA, Energy
+RECV3.SA, Energy
+PRIO3.SA, Energy
+PETZ3.SA, ConsumerDiscretionary
+PSSA3.SA, Financials
+POMO4.SA, ConsumerDiscretionary

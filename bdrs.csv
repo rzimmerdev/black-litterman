@@ -1,151 +1,146 @@
-tickers
-A1MD34.SA
-A1MT34.SA
-A1NE34.SA
-AAPL34.SA
-ABBV34.SA
-ABTT34.SA
-ACNB34.SA
-ADBE34.SA
-AMGN34.SA
-AMZO34.SA
-ARMT34.SA
-ASML34.SA
-ATTB34.SA
-AVGO34.SA
-AXPB34.SA
-AZOI34.SA
-BABA34.SA
-BAIQ39.SA
-BCHI39.SA
-BEEM39.SA
-BIIB34.SA
-BKNG34.SA
-BLAK34.SA
-BMYB34.SA
-BOAC34.SA
-BOEI34.SA
-BOXP34.SA
-C1CL34.SA
-C1DN34.SA
-CAPH34.SA
-CATP34.SA
-CHCM34.SA
-CHME34.SA
-CHVX34.SA
-CMCS34.SA
-COCA34.SA
-COLG34.SA
-COPH34.SA
-COTY34.SA
-COWC34.SA
-CSCO34.SA
-CTGP34.SA
-CTSH34.SA
-CVSH34.SA
-DEAI34.SA
-DHER34.SA
-DISB34.SA
-EBAY34.SA
-EVTC31.SA
-EXXO34.SA
-FCXO34.SA
-FDMO34.SA
-FDXB34.SA
-FMXB34.SA
-G1RM34.SA
-GDBR34.SA
-GEOO34.SA
-GILD34.SA
-GMCO34.SA
-GOGL34.SA
-GOGL35.SA
-GPSI34.SA
-GSGI34.SA
-HALI34.SA
-HOME34.SA
-HONB34.SA
-HPQB34.SA
-HSHY34.SA
-IBMB34.SA
-INBR32.SA
-ITLC34.SA
-J1NP34.SA
-JDCO34.SA
-JNJB34.SA
-JPMC34.SA
-K1IM34.SA
-K1LA34.SA
-KHCB34.SA
-KMBB34.SA
-L1RC34.SA
-LILY34.SA
-LMTB34.SA
-M1NS34.SA
-M1RN34.SA
-M1SC34.SA
-M1TA34.SA
-MACY34.SA
-MCDC34.SA
-MDLZ34.SA
-MDTC34.SA
-MELI34.SA
-METB34.SA
-MMMC34.SA
-MOSC34.SA
-MRCK34.SA
-MSBR34.SA
-MSCD34.SA
-MSFT34.SA
-MUTC34.SA
-N1TA34.SA
-N1XP34.SA
-NFLX34.SA
-NIKE34.SA
-NVDC34.SA
-ORCL34.SA
-ORLY34.SA
-P1LD34.SA
-P1SA34.SA
-PEPB34.SA
-PFIZ34.SA
-PGCO34.SA
-PYPL34.SA
-QCOM34.SA
-R1CL34.SA
-ROST34.SA
-ROXO34.SA
-RYTT34.SA
-S1NP34.SA
-SBUB34.SA
-SCHW34.SA
-SIMN34.SA
-SLBG34.SA
-SPGI34.SA
-SSFO34.SA
-TEXA34.SA
-TGTB34.SA
-TJXC34.SA
-TMOS34.SA
-TRVC34.SA
-TSLA34.SA
-TSMC34.SA
-UNHH34.SA
-UPAC34.SA
-UPSS34.SA
-USBC34.SA
-V1TA34.SA
-VERZ34.SA
-VISA34.SA
-W1DC34.SA
-W1YC34.SA
-WALM34.SA
-WFCO34.SA
-WUNI34.SA
-XPBR31.SA
-XRXB34.SA
-WALM34.SA
-WFCO34.SA
-WUNI34.SA
-XPBR31.SA
-XRXB34.SA
+tickers, sector
+A1MD34.SA, Technology
+A1MT34.SA, Industrials
+A1NE34.SA, Energy
+AAPL34.SA, Technology
+ABBV34.SA, Healthcare
+ABTT34.SA, ConsumerDiscretionary
+ACNB34.SA, Financials
+ADBE34.SA, Technology
+AMGN34.SA, Healthcare
+AMZO34.SA, ConsumerDiscretionary
+ARMT34.SA, Technology
+ASML34.SA, Technology
+ATTB34.SA, CommunicationServices
+AVGO34.SA, Technology
+AXPB34.SA, Financials
+AZOI34.SA, ConsumerDiscretionary
+BABA34.SA, ConsumerDiscretionary
+BAIQ39.SA, Financials
+BCHI39.SA, Financials
+BEEM39.SA, Energy
+BIIB34.SA, Healthcare
+BKNG34.SA, ConsumerDiscretionary
+BLAK34.SA, Technology
+BMYB34.SA, Healthcare
+BOAC34.SA, Industrials
+BOEI34.SA, Industrials
+BOXP34.SA, Technology
+C1CL34.SA, Financials
+C1DN34.SA, Technology
+CAPH34.SA, Healthcare
+CATP34.SA, Industrials
+CHCM34.SA, Healthcare
+CHME34.SA, Healthcare
+CHVX34.SA, Energy
+CMCS34.SA, CommunicationServices
+COCA34.SA, ConsumerStaples
+COLG34.SA, ConsumerStaples
+COPH34.SA, Energy
+COTY34.SA, ConsumerStaples
+COWC34.SA, Financials
+CSCO34.SA, Technology
+CTGP34.SA, Industrials
+CTSH34.SA, Technology
+CVSH34.SA, Healthcare
+DEAI34.SA, Industrials
+DHER34.SA, Industrials
+DISB34.SA, CommunicationServices
+EBAY34.SA, ConsumerDiscretionary
+EVTC31.SA, Technology
+EXXO34.SA, Energy
+FCXO34.SA, Energy
+FDMO34.SA, Technology
+FDXB34.SA, Industrials
+FMXB34.SA, Financials
+G1RM34.SA, ConsumerDiscretionary
+GDBR34.SA, CommunicationServices
+GEOO34.SA, RealEstate
+GILD34.SA, Healthcare
+GMCO34.SA, ConsumerDiscretionary
+GOGL34.SA, Technology
+GOGL35.SA, Technology
+GPSI34.SA, ConsumerDiscretionary
+GSGI34.SA, Energy
+HALI34.SA, Energy
+HOME34.SA, Industrials
+HONB34.SA, Industrials
+HPQB34.SA, Technology
+HSHY34.SA, ConsumerStaples
+IBMB34.SA, Technology
+INBR32.SA, Financials
+ITLC34.SA, Healthcare
+J1NP34.SA, Financials
+JDCO34.SA, ConsumerDiscretionary
+JNJB34.SA, Healthcare
+JPMC34.SA, Financials
+K1IM34.SA, Financials
+K1LA34.SA, ConsumerStaples
+KHCB34.SA, ConsumerStaples
+KMBB34.SA, Technology
+L1RC34.SA, RealEstate
+LILY34.SA, Healthcare
+LMTB34.SA, Industrials
+M1NS34.SA, Healthcare
+M1RN34.SA, Technology
+M1SC34.SA, Technology
+M1TA34.SA, ConsumerDiscretionary
+MACY34.SA, ConsumerDiscretionary
+MCDC34.SA, Financials
+MDLZ34.SA, ConsumerStaples
+MDTC34.SA, Healthcare
+MELI34.SA, ConsumerDiscretionary
+METB34.SA, Financials
+MMMC34.SA, Industrials
+MOSC34.SA, Materials
+MRCK34.SA, Healthcare
+MSBR34.SA, Financials
+MSCD34.SA, Financials
+MSFT34.SA, Technology
+MUTC34.SA, Financials
+N1TA34.SA, ConsumerDiscretionary
+N1XP34.SA, Technology
+NFLX34.SA, CommunicationServices
+NIKE34.SA, ConsumerDiscretionary
+NVDC34.SA, Technology
+ORCL34.SA, Technology
+ORLY34.SA, ConsumerDiscretionary
+P1LD34.SA, Financials
+P1SA34.SA, Healthcare
+PEPB34.SA, ConsumerStaples
+PFIZ34.SA, Healthcare
+PGCO34.SA, ConsumerStaples
+PYPL34.SA, Technology
+QCOM34.SA, Technology
+R1CL34.SA, Financials
+ROST34.SA, ConsumerDiscretionary
+ROXO34.SA, ConsumerDiscretionary
+RYTT34.SA, Healthcare
+S1NP34.SA, Financials
+SBUB34.SA, ConsumerDiscretionary
+SCHW34.SA, Financials
+SIMN34.SA, Technology
+SLBG34.SA, ConsumerStaples
+SPGI34.SA, Financials
+SSFO34.SA, Technology
+TEXA34.SA, Industrials
+TGTB34.SA, ConsumerDiscretionary
+TJXC34.SA, ConsumerDiscretionary
+TMOS34.SA, Technology
+TRVC34.SA, CommunicationServices
+TSLA34.SA, ConsumerDiscretionary
+TSMC34.SA, Technology
+UNHH34.SA, Healthcare
+UPAC34.SA, Industrials
+UPSS34.SA, Industrials
+USBC34.SA, Financials
+V1TA34.SA, Technology
+VERZ34.SA, CommunicationServices
+VISA34.SA, Financials
+W1DC34.SA, Healthcare
+W1YC34.SA, CommunicationServices
+WALM34.SA, ConsumerStaples
+WFCO34.SA, Financials
+WUNI34.SA, Technology
+XPBR31.SA, Financials
+XRXB34.SA, Technology

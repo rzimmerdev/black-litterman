@@ -15,7 +15,9 @@ def create_history(security_name, product):
     product.index.names = ['date', 'security']
 
     sm = dx.SecurityManager.from_list([security])
-    schema = dx.Schema(levels=[dx.SchemaLevel.DATE, dx.SchemaLevel.SECURITY], fields=['close'], security_manager=sm)
+    schema = dx.Schema(levels={dx.SchemaLevel.DATE: pd.Timestamp, dx.SchemaLevel.SECURITY: dx.Security},
+                       fields={"close": float},
+                       security_manager=sm)
 
     return dx.History(product, schema)
 
