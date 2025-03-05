@@ -42,6 +42,11 @@ The portfolio optimization is done using:
 - Black-Litterman model for incorporating investor views.
 - Convex optimization with constraints on sector allocation, position limits, and asset selection.
 
+
+## Running with our Views
+To run the same model and views we used for the competition, simply run the `main.py` file.
+
+
 ## License
 This project is released under the MIT License.
 
